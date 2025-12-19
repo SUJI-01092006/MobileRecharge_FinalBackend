@@ -12,9 +12,18 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: true, // Allow all origins temporarily
-  credentials: true
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173', 
+    'https://mobilerechare-finalfrontend2.onrender.com'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 app.use(express.json());
 
 // ROOT ROUTE (IMPORTANT)
